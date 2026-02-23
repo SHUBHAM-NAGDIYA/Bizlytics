@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import dj_database_url
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e51u1#_eq=oy50m#+s%egi&y6rvexoouz6+km45!bbsu7xmj!d'
+
+SECRET_KEY = os.environ.get('django-insecure-e51u1#_eq=oy50m#+s%egi&y6rvexoouz6+km45!bbsu7xmj!d')
+DEBUG = os.environ.get("DEBUG") == "True"
+ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,8 +51,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
 ROOT_URLCONF = 'main.urls'
 
@@ -86,6 +93,11 @@ DATABASES = {
     }
 }
 
+
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get("postgresql://bizlytics_db_n9h3_user:FfW9Q3GaVkF4KH9JHkw83iP2guIf3GBw@dpg-d6easka4d50c73dt14hg-a/bizlytics_db_n9h3"))
+}
 
 
 # Password validation
