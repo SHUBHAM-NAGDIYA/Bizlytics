@@ -1,0 +1,49 @@
+{% extends "base_dashboard.html" %}
+
+{% block content %}
+
+<div class="max-w-2xl mx-auto bg-white shadow-xl rounded-2xl p-10">
+
+    <h2 class="text-2xl font-bold mb-6">
+        Upload Sales Data
+    </h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="mb-4 p-3 rounded 
+                {% if message.tags == 'error' %}
+                    bg-red-100 text-red-600
+                {% else %}
+                    bg-green-100 text-green-600
+                {% endif %}
+            ">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+
+        <input type="file"
+               name="uploaded_file"
+               accept=".csv, .xlsx"
+               class="w-full p-3 border rounded-lg"
+               required>
+
+        <button type="submit"
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+            Upload File
+        </button>
+    </form>
+
+    <div class="mt-6 text-gray-500 text-sm">
+        Supported formats: CSV, XLSX  
+        Required columns: 'ProductID', 'ProductName', 'Category',
+        'Date', 'Quantity', 'QuantitySold',
+        'UnitPrice', 'PriceAtSale'
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,1148 @@
+[INFO] 2026-02-23 15:48:36,224 app.services.ingestion Sales upload started for store: a
+[INFO] 2026-02-23 15:48:36,286 app.services.ingestion Sales upload started for store: a
+[INFO] 2026-02-23 15:49:22,335 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 15:50:15,937 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 15:57:08,515 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\models.py changed, reloading.
+[INFO] 2026-02-23 15:57:21,431 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:01:02,255 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:01:40,230 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 166, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:01:40,242 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 159, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:01:54,777 app.services.ingestion Sales upload started for store: a
+[INFO] 2026-02-23 16:01:55,105 app.services.ingestion Sales upload started for store: a
+[INFO] 2026-02-23 16:01:55,423 app.services.ingestion Upload completed for store a. Valid rows: 1647, Inserted: 1647
+[INFO] 2026-02-23 16:01:55,424 app.services.ingestion Sales upload started for store: a
+[ERROR] 2026-02-23 16:01:55,758 django.request Internal Server Error: /upload_sales/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "app_product_store_id_ProductID_fa797fa2_uniq"
+DETAIL:  Key (store_id, "ProductID")=(1, spicy_ital_l) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 110, in upload_sales
+    process_sales_upload(file, store)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py", line 147, in process_sales_upload
+    Product.objects.bulk_create(new_products)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 833, in bulk_create
+    returned_columns = self._batched_insert(
+        objs_without_pk,
+    ...<4 lines>...
+        unique_fields=unique_fields,
+    )
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1956, in _batched_insert
+    self._insert(
+    ~~~~~~~~~~~~^
+        item,
+        ^^^^^
+    ...<5 lines>...
+        returning_fields=returning_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1918, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1925, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "app_product_store_id_ProductID_fa797fa2_uniq"
+DETAIL:  Key (store_id, "ProductID")=(1, spicy_ital_l) already exists.
+[INFO] 2026-02-23 16:08:20,114 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 16:08:31,237 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:08:53,591 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 16:08:55,210 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:10:24,798 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:10:33,514 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:11:20,620 django.request Internal Server Error: /get_insights/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 154, in get_insights
+    data = get_sales_insights(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in get_sales_insights
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in <genexpr>
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+                              ~~~^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[ERROR] 2026-02-23 16:11:20,625 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:11:20,634 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:11:23,016 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:11:23,127 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:11:23,198 django.request Internal Server Error: /get_insights/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 154, in get_insights
+    data = get_sales_insights(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in get_sales_insights
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in <genexpr>
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+                              ~~~^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[ERROR] 2026-02-23 16:12:34,666 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:12:34,680 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:12:35,844 django.request Internal Server Error: /get_insights/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 154, in get_insights
+    data = get_sales_insights(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in get_sales_insights
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in <genexpr>
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+                              ~~~^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[ERROR] 2026-02-23 16:12:42,409 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 181, in run_full_inventory_ai_engine
+    forecast_data = generate_demand_forecast()
+TypeError: generate_demand_forecast() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:13:08,314 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:13:08,395 django.request Internal Server Error: /get_insights/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 154, in get_insights
+    data = get_sales_insights(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in get_sales_insights
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in <genexpr>
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+                              ~~~^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[ERROR] 2026-02-23 16:13:08,442 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:13:29,918 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:13:29,995 django.request Internal Server Error: /get_insights/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 154, in get_insights
+    data = get_sales_insights(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in get_sales_insights
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in <genexpr>
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+                              ~~~^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[ERROR] 2026-02-23 16:13:30,030 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:15:15,506 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:15:40,787 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:15:40,796 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:15:40,856 django.request Internal Server Error: /get_insights/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 154, in get_insights
+    data = get_sales_insights(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in get_sales_insights
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py", line 16, in <genexpr>
+    total_sold_products = sum(row['total_sold'] for row in base_qs)
+                              ~~~^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[INFO] 2026-02-23 16:20:47,816 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\analytics.py changed, reloading.
+[INFO] 2026-02-23 16:21:06,265 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:21:43,843 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:21:43,853 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:21:44,277 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:21:44,284 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:21:51,630 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:21:51,648 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:21:57,002 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 181, in run_full_inventory_ai_engine
+    forecast_data = generate_demand_forecast()
+TypeError: generate_demand_forecast() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:25:32,476 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\forecasting_engine.py changed, reloading.
+[INFO] 2026-02-23 16:25:54,038 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:26:30,833 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\forecasting_engine.py changed, reloading.
+[INFO] 2026-02-23 16:26:39,248 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:27:14,150 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\forecasting_engine.py changed, reloading.
+[INFO] 2026-02-23 16:27:18,125 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:27:36,501 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:27:36,506 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:28:11,802 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:28:27,710 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:28:27,726 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:28:58,344 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:29:03,110 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:29:21,631 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+                                  ^
+NameError: name 'store' is not defined
+[ERROR] 2026-02-23 16:29:21,632 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:31:31,247 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\forecasting.py changed, reloading.
+[INFO] 2026-02-23 16:31:38,862 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:31:51,633 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 168, in low_stock_alert
+    alerts = get_low_stock_alerts()
+TypeError: get_low_stock_alerts() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:31:51,637 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 161, in forecast_demand
+    data = get_revenue_forecast_metrics()
+TypeError: get_revenue_forecast_metrics() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:32:14,949 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:32:29,947 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:32:36,168 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:32:45,255 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:33:06,017 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:33:10,904 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:35:07,439 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:35:11,088 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:35:19,833 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:35:23,385 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 16:35:43,896 django.request Internal Server Error: /forecast_demand/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2128, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'DeferredAttribute'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 162, in forecast_demand
+    data = get_revenue_forecast_metrics(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\forecasting.py", line 11, in get_revenue_forecast_metrics
+    Sales.objects.filter(store=store)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1671, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1703, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1613, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1440, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\lookups.py", line 35, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\related_lookups.py", line 113, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2130, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+TypeError: Field 'id' expected a number but got <django.db.models.query_utils.DeferredAttribute object at 0x000001EF20398E10>.
+[ERROR] 2026-02-23 16:35:43,903 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2128, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'DeferredAttribute'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 170, in low_stock_alert
+    alerts = get_low_stock_alerts(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\inventory.py", line 7, in get_low_stock_alerts
+    Sales.objects.filter(store=store)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1671, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1703, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1613, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1440, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\lookups.py", line 35, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\related_lookups.py", line 113, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2130, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+TypeError: Field 'id' expected a number but got <django.db.models.query_utils.DeferredAttribute object at 0x000001EF20398E10>.
+[INFO] 2026-02-23 16:40:09,240 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:40:36,257 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:41:01,969 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:41:07,238 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:42:45,191 app.services.forecasting Forecast demand endpoint triggered
+[ERROR] 2026-02-23 16:42:46,399 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2128, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'DeferredAttribute'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 170, in low_stock_alert
+    alerts = get_low_stock_alerts(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\inventory.py", line 7, in get_low_stock_alerts
+    Sales.objects.filter(store=store)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1671, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1703, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1613, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1440, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\lookups.py", line 35, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\related_lookups.py", line 113, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2130, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+TypeError: Field 'id' expected a number but got <django.db.models.query_utils.DeferredAttribute object at 0x0000023719338E10>.
+[ERROR] 2026-02-23 16:42:57,132 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 183, in run_full_inventory_ai_engine
+    forecast_data = generate_demand_forecast()
+TypeError: generate_demand_forecast() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:42:57,271 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 183, in run_full_inventory_ai_engine
+    forecast_data = generate_demand_forecast()
+TypeError: generate_demand_forecast() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:42:57,749 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 183, in run_full_inventory_ai_engine
+    forecast_data = generate_demand_forecast()
+TypeError: generate_demand_forecast() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:42:57,912 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 183, in run_full_inventory_ai_engine
+    forecast_data = generate_demand_forecast()
+TypeError: generate_demand_forecast() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:43:03,963 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 183, in run_full_inventory_ai_engine
+    forecast_data = generate_demand_forecast()
+TypeError: generate_demand_forecast() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:43:04,506 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 183, in run_full_inventory_ai_engine
+    forecast_data = generate_demand_forecast()
+TypeError: generate_demand_forecast() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:44:12,035 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:44:25,222 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:44:42,072 app.services.forecasting Forecast demand endpoint triggered
+[ERROR] 2026-02-23 16:44:42,169 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 170, in low_stock_alert
+    alerts = get_low_stock_alerts(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\inventory.py", line 16, in get_low_stock_alerts
+    remaining = row['remaining']
+                ~~~^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[ERROR] 2026-02-23 16:44:49,388 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data)
+TypeError: generate_stock_recommendations() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:44:51,657 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data)
+TypeError: generate_stock_recommendations() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:44:52,600 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data)
+TypeError: generate_stock_recommendations() missing 1 required positional argument: 'store'
+[ERROR] 2026-02-23 16:44:53,626 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data)
+TypeError: generate_stock_recommendations() missing 1 required positional argument: 'store'
+[INFO] 2026-02-23 16:45:55,767 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 16:46:00,987 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:46:16,763 app.services.forecasting Forecast demand endpoint triggered
+[ERROR] 2026-02-23 16:46:16,887 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 170, in low_stock_alert
+    alerts = get_low_stock_alerts(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\inventory.py", line 16, in get_low_stock_alerts
+    remaining = row['remaining']
+                ~~~^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[ERROR] 2026-02-23 16:46:23,099 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data,store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py", line 52, in generate_stock_recommendations
+    item['ProductID__ProductID']: item['total_sold']
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[ERROR] 2026-02-23 16:46:24,422 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data,store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py", line 52, in generate_stock_recommendations
+    item['ProductID__ProductID']: item['total_sold']
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[INFO] 2026-02-23 16:47:58,764 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 16:48:12,549 app.services.forecasting Forecast demand endpoint triggered
+[ERROR] 2026-02-23 16:48:12,633 django.request Internal Server Error: /low_stock_alert/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 170, in low_stock_alert
+    alerts = get_low_stock_alerts(store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\inventory.py", line 16, in get_low_stock_alerts
+    remaining = row['remaining']
+                ~~~^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[INFO] 2026-02-23 16:59:43,782 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 17:00:21,955 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 17:01:00,461 app.services.forecasting Forecast demand endpoint triggered
+[ERROR] 2026-02-23 17:01:22,005 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data,store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py", line 52, in generate_stock_recommendations
+    item['ProductID__ProductID']: item['total_sold']
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Sales' object is not subscriptable
+[INFO] 2026-02-23 17:06:30,022 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py changed, reloading.
+[INFO] 2026-02-23 17:06:43,155 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 17:07:00,162 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py changed, reloading.
+[INFO] 2026-02-23 17:07:05,158 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-23 17:07:40,393 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data,store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py", line 90, in generate_stock_recommendations
+        store=store,
+    ...<7 lines>...
+    
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 667, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\base.py", line 590, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: StockRecommendation() got unexpected keyword arguments: 'ForecasSevendays'
+[INFO] 2026-02-23 17:07:42,929 app.services.forecasting Forecast demand endpoint triggered
+[ERROR] 2026-02-23 17:07:46,366 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data,store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py", line 90, in generate_stock_recommendations
+        store=store,
+    ...<7 lines>...
+    
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 667, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\base.py", line 590, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: StockRecommendation() got unexpected keyword arguments: 'ForecasSevendays'
+[INFO] 2026-02-23 17:14:41,725 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 17:15:37,807 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py changed, reloading.
+[INFO] 2026-02-23 17:16:03,448 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 17:16:14,075 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py changed, reloading.
+[INFO] 2026-02-23 17:16:15,822 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 17:16:23,492 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py changed, reloading.
+[INFO] 2026-02-23 17:16:29,794 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 17:16:44,810 app.services.forecasting Forecast demand endpoint triggered
+[ERROR] 2026-02-23 17:16:47,514 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data,store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py", line 93, in generate_stock_recommendations
+    StockRecommendation.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        store=store,
+        ^^^^^^^^^^^^
+    ...<5 lines>...
+        Confidence=forecast_data.get("confidence")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 667, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\base.py", line 590, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: StockRecommendation() got unexpected keyword arguments: 'ForecasSevendays'
+[ERROR] 2026-02-23 17:16:53,465 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data,store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py", line 93, in generate_stock_recommendations
+    StockRecommendation.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        store=store,
+        ^^^^^^^^^^^^
+    ...<5 lines>...
+        Confidence=forecast_data.get("confidence")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 667, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\base.py", line 590, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: StockRecommendation() got unexpected keyword arguments: 'ForecasSevendays'
+[INFO] 2026-02-23 17:20:47,508 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 17:21:19,639 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 17:21:21,806 app.services.forecasting Forecast demand endpoint triggered
+[ERROR] 2026-02-23 17:21:24,835 django.request Internal Server Error: /run_full_inventory_ai_engine/
+Traceback (most recent call last):
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py", line 185, in run_full_inventory_ai_engine
+    stock_recommendations = generate_stock_recommendations(forecast_data,store)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\stock_recommendation_engine.py", line 93, in generate_stock_recommendations
+    StockRecommendation.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        store=store,
+        ^^^^^^^^^^^^
+    ...<5 lines>...
+        Confidence=forecast_data.get("confidence")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\query.py", line 667, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\.venv\Lib\site-packages\django\db\models\base.py", line 590, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: StockRecommendation() got unexpected keyword arguments: 'ForecasSevendays'
+[INFO] 2026-02-23 17:27:52,381 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 17:28:32,619 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:39:36,467 django.utils.autoreload Watching for file changes with StatReloader
+[WARNING] 2026-02-23 23:40:06,858 django.request Not Found: /favicon.ico
+[WARNING] 2026-02-23 23:40:06,881 django.request Not Found: /favicon.ico
+[WARNING] 2026-02-23 23:40:06,906 django.request Not Found: /favicon.ico
+[INFO] 2026-02-23 23:40:43,471 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:41:32,295 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:41:34,537 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:41:36,987 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:42:40,582 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:43:03,047 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:43:56,776 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:44:30,129 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:44:59,721 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-23 23:50:47,424 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 23:51:03,354 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:51:41,994 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 23:51:47,958 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:51:57,081 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 23:52:05,134 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:52:12,529 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 23:52:18,375 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:52:50,481 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\views.py changed, reloading.
+[INFO] 2026-02-23 23:52:58,871 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:53:25,976 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:53:31,008 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:53:36,047 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:53:39,743 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:53:46,427 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:53:53,060 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:54:01,186 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:54:08,028 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:54:30,135 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:54:33,858 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:54:39,904 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:54:43,353 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:54:57,190 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:55:01,958 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:55:39,181 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:55:43,451 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:55:57,068 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:56:00,247 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:56:12,972 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:56:16,574 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:56:27,092 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:56:31,298 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:58:16,385 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:58:39,519 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:58:43,360 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:59:36,297 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\app\services\ingestion.py changed, reloading.
+[INFO] 2026-02-23 23:59:42,681 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-23 23:59:59,137 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-24 00:00:44,246 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-24 00:01:16,690 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-24 00:02:29,054 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-24 00:02:47,718 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-24 00:32:06,060 django.utils.autoreload C:\Users\shubh\OneDrive\Desktop\Nagdiya\Grocery -Store-Performance\main\main\settings.py changed, reloading.
+[INFO] 2026-02-24 00:32:23,977 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-24 00:36:38,886 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-24 00:38:28,206 app.services.forecasting Forecast demand endpoint triggered
+[INFO] 2026-02-24 00:38:51,207 app.services.forecasting Forecast demand endpoint triggered

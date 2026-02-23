@@ -1,0 +1,252 @@
+{% extends "base_dashboard.html" %}
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- PAGE HEADER -->
+    <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-gray-800">
+            Dashboard Overview
+        </h1>
+
+        <button onclick="runAIEngine()"
+            class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+            Run Inventory AI
+        </button>
+    </div>
+
+
+    <!-- KPI CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-sm text-gray-500">Total Revenue</p>
+            <h2 id="totalRevenue" class="text-2xl font-bold mt-2">₹0</h2>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-sm text-gray-500">Products Sold</p>
+            <h2 id="totalSold" class="text-2xl font-bold mt-2">0</h2>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-sm text-gray-500">Best Week</p>
+            <h2 id="bestWeek" class="text-lg font-bold mt-2">-</h2>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-sm text-gray-500">Worst Week</p>
+            <h2 id="worstWeek" class="text-lg font-bold mt-2 text-red-500">-</h2>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-sm text-gray-500">Stock Alerts</p>
+            <h2 id="stockAlerts" class="text-2xl font-bold mt-2 text-red-500">0</h2>
+        </div>
+
+    </div>
+
+
+    <!-- REVENUE CHART -->
+    <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold mb-4">Weekly Revenue</h2>
+        <canvas id="revenueChart"></canvas>
+    </div>
+
+
+    <!-- TOP & LEAST PRODUCTS -->
+    <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- TOP PRODUCTS -->
+        <div class="bg-white p-6 rounded-xl shadow">
+            <h2 class="text-lg font-semibold mb-4">Top Products</h2>
+            <table class="w-full text-left text-sm">
+                <thead>
+                    <tr class="text-gray-500 border-b">
+                        <th class="py-2">Product</th>
+                        <th>Total Sold</th>
+                        <th>Revenue</th>
+                    </tr>
+                </thead>
+                <tbody id="topProductsTable"></tbody>
+            </table>
+        </div>
+
+        <!-- LEAST PRODUCTS -->
+        <div class="bg-white p-6 rounded-xl shadow">
+            <h2 class="text-lg font-semibold mb-4">Least Selling Products</h2>
+            <table class="w-full text-left text-sm">
+                <thead>
+                    <tr class="text-gray-500 border-b">
+                        <th class="py-2">Product</th>
+                        <th>Total Sold</th>
+                    </tr>
+                </thead>
+                <tbody id="leastProductsTable"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <!-- AI RECOMMENDATIONS -->
+    <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold mb-4">AI Inventory Recommendations</h2>
+
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-gray-500 border-b">
+                    <th class="py-2">Product</th>
+                    <th>Current Stock</th>
+                    <th>7 Day Forecast</th>
+                    <th>Recommended Order</th>
+                    <th>Risk</th>
+                    <th>Confidence</th>
+                </tr>
+            </thead>
+            <tbody id="aiRecommendations">
+                <tr>
+                    <td colspan="6" class="text-gray-400 py-4">
+                        Run AI Engine to generate recommendations.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+<script>
+
+let revenueChart;
+
+document.addEventListener("DOMContentLoaded", function() {
+    loadDashboardData();
+});
+
+function loadDashboardData() {
+
+    // SALES INSIGHTS
+    fetch("/get_insights/")
+    .then(res => res.json())
+    .then(data => {
+
+        document.getElementById("totalSold").innerText =
+            data.total_sold_products;
+
+        // TOP PRODUCTS
+        let topTable = "";
+        data.top_products.forEach(item => {
+            topTable += `
+                <tr class="border-b">
+                    <td class="py-2">${item.ProductID__ProductName}</td>
+                    <td>${item.total_sold}</td>
+                    <td>₹${item.product_revenue}</td>
+                </tr>`;
+        });
+        document.getElementById("topProductsTable").innerHTML = topTable;
+
+        // LEAST PRODUCTS
+        let leastTable = "";
+        data.least_products.forEach(item => {
+            leastTable += `
+                <tr class="border-b">
+                    <td class="py-2">${item.ProductID__ProductName}</td>
+                    <td>${item.total_sold}</td>
+                </tr>`;
+        });
+        document.getElementById("leastProductsTable").innerHTML = leastTable;
+
+    });
+
+
+    // REVENUE METRICS
+    fetch("/forecast_demand/")
+    .then(res => res.json())
+    .then(data => {
+
+        document.getElementById("totalRevenue").innerText =
+            "₹" + data.total_revenue;
+
+        if (data.best_week) {
+            document.getElementById("bestWeek").innerText =
+                data.best_week.week_name;
+        }
+
+        if (data.worst_week) {
+            document.getElementById("worstWeek").innerText =
+                data.worst_week.week_name;
+        }
+
+        const labels = data.weekly_revenue.map(item => item.week_name);
+        const revenue = data.weekly_revenue.map(item => item.weekly_revenue);
+
+        const ctx = document.getElementById("revenueChart").getContext("2d");
+
+        if (revenueChart) revenueChart.destroy();
+
+        revenueChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Weekly Revenue",
+                    data: revenue,
+                    borderColor: "#6366f1",
+                    backgroundColor: "rgba(99,102,241,0.1)",
+                    tension: 0.3,
+                    fill: true
+                }]
+            }
+        });
+
+    });
+
+
+    // LOW STOCK
+    fetch("/low_stock_alert/")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("stockAlerts").innerText =
+            data.stockAlert.length;
+    });
+
+}
+
+
+function runAIEngine() {
+
+    fetch("/run_full_inventory_ai_engine/")
+    .then(res => res.json())
+    .then(data => {
+
+        let rows = "";
+
+        data.recommendations.forEach(item => {
+
+            let riskColor = "text-green-500";
+            if (item.risk_level === "critical") riskColor = "text-red-500";
+            if (item.risk_level === "warning") riskColor = "text-yellow-500";
+
+            rows += `
+                <tr class="border-b">
+                    <td class="py-2 font-medium">${item.product_name}</td>
+                    <td>${item.current_stock}</td>
+                    <td>${item.forecast_7_days}</td>
+                    <td>${item.recommended_order}</td>
+                    <td class="${riskColor} font-semibold">
+                        ${item.risk_level}
+                    </td>
+                    <td>${item.confidence}</td>
+                </tr>`;
+        });
+
+        document.getElementById("aiRecommendations").innerHTML = rows;
+
+    });
+
+}
+
+</script>
+
+{% endblock %}
