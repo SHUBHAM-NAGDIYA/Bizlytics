@@ -7,7 +7,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #SECRET_KEY = os.environ.get('J-2F5WVva_U4Hp0Geki_TE2SM0d04gurUlLe62NclCF1ixUcZmN5tIGmmOMnxg1Bafg')
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = os.environ.get("DEBUG", "True") == "True"
+#DEBUG = os.environ.get("DEBUG", "True") == "True"
+DEBUG = True
 ROOT_URLCONF = 'main.urls'
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
