@@ -1,17 +1,18 @@
 from pathlib import Path
 import os
-import dj_database_url
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#SECRET_KEY = os.environ.get('J-2F5WVva_U4Hp0Geki_TE2SM0d04gurUlLe62NclCF1ixUcZmN5tIGmmOMnxg1Bafg')
-SECRET_KEY = os.environ.get("SECRET_KEY")
-#DEBUG = os.environ.get("DEBUG", "True") == "True"
-DEBUG = True
-ROOT_URLCONF = 'main.urls'
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+# SECURITY
+SECRET_KEY = 'django-insecure-change-this-in-production'
 
+DEBUG = True
+
+ALLOWED_HOSTS = []
+
+# -------------------------------
+# DATABASE (PostgreSQL)
+# -------------------------------
 
 DATABASES = {
     "default": dj_database_url.config(
@@ -19,10 +20,9 @@ DATABASES = {
         conn_max_age=600
     )
 }
-
-
-
-# Application definition
+# -------------------------------
+# INSTALLED APPS
+# -------------------------------
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -31,9 +31,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
-    
+
+    'app',
 ]
+
+# -------------------------------
+# MIDDLEWARE
+# -------------------------------
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -46,10 +50,21 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# -------------------------------
+# URL / WSGI
+# -------------------------------
+
+ROOT_URLCONF = 'main.urls'
+WSGI_APPLICATION = 'main.wsgi.application'
+
+# -------------------------------
+# TEMPLATES
+# -------------------------------
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'Templates')],
+        'DIRS': ['Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -61,18 +76,36 @@ TEMPLATES = [
     },
 ]
 
+# -------------------------------
+# PASSWORD VALIDATION
+# -------------------------------
+
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# -------------------------------
+# INTERNATIONALIZATION
+# -------------------------------
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
+
+# -------------------------------
+# STATIC FILES
+# -------------------------------
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# -------------------------------
+# DEFAULT PRIMARY KEY
+# -------------------------------
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
