@@ -65,7 +65,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'Template'],
+        'DIRS': [BASE_DIR / 'Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
