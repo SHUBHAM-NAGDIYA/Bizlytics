@@ -5,7 +5,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # TODO: pull this from an env var before deploying anywhere real
-SECRET_KEY = 'django-insecure-change-this-in-production'
+SECRET_KEY = 'django-insecure-e51u1#_eq=oy50m#+s%egi&y6rvexoouz6+km45!bbsu7xmj!d'
 
 DEBUG = True
 
